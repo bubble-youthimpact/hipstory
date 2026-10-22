@@ -300,23 +300,29 @@
     var j = D.ui.join;
     var msg = form.querySelector('.form-msg');
     var btn = form.querySelector('button[type="submit"]');
+    var OK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+    var ERR_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/></svg>';
+    function status(kind, text) {
+      msg.className = 'form-msg' + (kind ? ' is-' + kind : '');
+      msg.innerHTML = kind ? (kind === 'success' ? OK_ICON : ERR_ICON) + '<span>' + esc(text) + '</span>' : '';
+    }
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (!form.reportValidity()) return;
-      if (PREVIEW) { msg.textContent = 'Preview only: on the live site this sends to ' + D.site.formEmail + '.'; return; }
+      if (!form.checkValidity()) { status('error', t(j.invalid)); form.reportValidity(); return; }
+      if (PREVIEW) { status('success', 'Preview only: on the live site this sends to ' + D.site.formEmail + '.'); return; }
       var data = new FormData(form);
       data.append('_subject', 'HIPSTORY — new museum wants to join');
       data.append('_template', 'table');
       data.append('_captcha', 'false');
-      btn.disabled = true; btn.textContent = t(j.sending); msg.textContent = '';
+      btn.disabled = true; btn.textContent = t(j.sending); status('', '');
       fetch('https://formsubmit.co/ajax/' + D.site.formEmail, {
         method: 'POST', headers: { Accept: 'application/json' }, body: data
       }).then(function (r) { return r.json().then(function (b) { return { ok: r.ok, b: b }; }); })
         .then(function (res) {
           if (!res.ok || String(res.b.success) === 'false') throw new Error(res.b.message || 'failed');
-          form.reset(); msg.textContent = t(j.success);
+          form.reset(); status('success', t(j.success));
         })
-        .catch(function () { msg.textContent = t(j.error); })
+        .catch(function () { status('error', t(j.error)); })
         .then(function () { btn.disabled = false; btn.textContent = t(j.submit); });
     });
   }

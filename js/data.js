@@ -41,8 +41,9 @@ window.HIPSTORY = {
       phone: { en: 'Fax / Phone number', ko: '팩스 / 전화번호' },
       submit: { en: 'Submit', ko: '제출' },
       sending: { en: 'Sending…', ko: '보내는 중…' },
-      success: { en: 'Thank you! We will contact you soon.', ko: '감사합니다! 곧 연락드리겠습니다.' },
-      error: { en: 'Something went wrong. Please try again or email us directly.', ko: '전송에 실패했습니다. 다시 시도하거나 이메일로 연락해 주세요.' }
+      success: { en: 'Thank you! Your request was sent. We will contact you soon.', ko: '감사합니다! 신청이 접수되었습니다. 곧 연락드리겠습니다.' },
+      error: { en: 'Sending failed. Please try again, or email hipstory.yi@gmail.com.', ko: '전송에 실패했습니다. 다시 시도하거나 hipstory.yi@gmail.com으로 연락해 주세요.' },
+      invalid: { en: 'Please enter the museum name and a valid email address.', ko: '박물관 이름과 올바른 이메일 주소를 입력해 주세요.' }
     },
     notFound: {
       title: { en: 'Page not found', ko: '페이지를 찾을 수 없습니다' },
