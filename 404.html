@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 | HIPSTORY</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+  // Custom domain or user site → "/". Project site (user.github.io/repo/) → "/repo/".
+  var seg = location.pathname.split('/')[1];
+  var BASE = (/\.github\.io$/.test(location.hostname) && seg) ? '/' + seg + '/' : '/';
+  document.write('<link rel="icon" href="' + BASE + 'images/logo.webp"><link rel="stylesheet" href="' + BASE + 'css/style.css">');
+</script>
+</head>
+<body data-page="404">
+<div id="app"></div>
+<script>
+  document.write('<script src="' + BASE + 'js/data.js"><\/script><script src="' + BASE + 'js/app.js"><\/script>');
+</script>
+</body>
+</html>
